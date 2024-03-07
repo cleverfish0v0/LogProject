@@ -3,17 +3,23 @@
 
     <div class="header">
       <div class="toggle-button" @click="toggleMenu">菜单</div>
+
       <el-row>
+
         <el-col :span="24"
         >
           <div class="grid-content bg-purple-dark">
             <h1>
               <span class="title">{{ title }}</span>
             </h1>
+
+            <div class="toggle-button" @click="toggleMenu">菜单</div> <!-- 移动到这里 -->
+
           </div>
         </el-col
         >
       </el-row>
+
     </div>
 
     <div class="body">
@@ -22,7 +28,7 @@
 
 
         <!-- v-bind:style="{ width: detailWidth + 'px' }" -->
-        <el-col id="menu" class="left" :span="menu_span" v-show="isMenuVisible"
+        <el-col id="menu" class="left" :span="menu_span" v-show="isMenuVisible" :class="{'fullscreen-menu': isMenuVisible}"
         >
           <div class="bg-purple">
             <el-input
@@ -283,6 +289,30 @@
 </script>
 
 <style scoped>
+  .grid-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 如果您希望菜单按钮垂直居中 */
+    /* 保持其他样式不变 */
+  }
+
+  @media (max-width: 768px) {
+    .fullscreen-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 100; /* 确保覆盖其他内容 */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .el-row, .el-col, .body, .header {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
 
   .toggle-button {
     display: none; /* 默认不显示，只在移动设备上显示 */
